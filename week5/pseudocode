@@ -1,0 +1,44 @@
+BEGIN
+    CREATE list days
+    CREATE list temperatures
+
+    ADD "Monday" TO days
+    ADD "Tuesday" TO days
+    ADD "Wednesday" TO days
+    ADD "Thursday" TO days
+    ADD "Friday" TO days
+    ADD "Saturday" TO days
+    ADD "Sunday" TO days
+
+    FOR each day in days DO
+        PROMPT "Enter the temperature for <day>: "
+        READ temperature
+        ADD temperature TO temperatures
+    END FOR
+
+    FOR index from 0 to LENGTH of days - 1 DO
+        PRINT day at index + ": " + temperature at index + "°F"
+    END FOR
+
+    PRINT "Enter 'week' to see weekly average temperature or 'day' to see a specific day's temperature: "
+    READ input (string)
+
+    IF input EQUALS "week" THEN
+        SET total TO 0
+        FOR each temperature in temperatures DO
+            total = total + temperature
+        END FOR
+
+        SET average = total divided by number of temperatures
+        PRINT "The average temperature for the week is: " + average + "°F"
+    ELSE
+        FIND index of input in days list
+        IF index IS NOT -1 THEN
+            PRINT input + ": " + temperature at index + "°F"
+        ELSE
+            PRINT "Invalid input. Pleasse enter valid day or 'week'."
+        END IF 
+    END IF
+
+END
+
